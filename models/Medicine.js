@@ -26,7 +26,7 @@ const medicineSchema = mongoose.Schema({
     required: true,
   },
   typeOfDosageForm: {
-    type: Number,
+    type: String,
     required: true,
   },
   dateOfManufacture: {
