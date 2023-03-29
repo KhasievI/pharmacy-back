@@ -15,12 +15,12 @@ module.exports.pharmacyController = {
   registration: async (req, res) => {
     try {
       const { name, password, address, license, ogrn, inn } = req.body;
-      const candidate = await Auth.findOne({ name });
+      const candidate = await Pharmacy.findOne({ name });
       if (candidate) {
         return res.status(400).json({ message: "пользователь с таким именем уже существует" });
       }
       const hashPassword = bcrypt.hashSync(password, 7);
-      const user = new Auth({
+      const user = new Pharmacy({
         name,
         password: hashPassword,
         address,
@@ -47,7 +47,7 @@ module.exports.pharmacyController = {
   login: async (req, res) => {
     try {
       const { name, password } = req.body;
-      const user = await Auth.findOne({ name });
+      const user = await Pharmacy.findOne({ name });
       if (!user) {
         return res.status(400).json({ message: `пользователь ${name} не найден` });
       }
