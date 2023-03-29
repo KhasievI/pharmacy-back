@@ -1,11 +1,11 @@
 const mongoose = require("mongoose");
 
 const medicineSchema = mongoose.Schema({
-  nameOfThePharmacy: {
+  pharmacyName: {
     type: mongoose.SchemaTypes.ObjectId,
     ref: "Pharmacy",
   },
-  pharmacyAaddress: {
+  address: {
     type: mongoose.SchemaTypes.ObjectId,
     ref: "Pharmacy",
   },

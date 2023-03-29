@@ -4,8 +4,8 @@ module.exports.medicineController = {
   addMedicine: async (req, res) => {
     try {
       const medicine = await Medicines.create({
-        nameOfThePharmacy: req.body.nameOfThePharmacy,//наименование аптечной организации
-        pharmacyAaddress: req.body.pharmacyAaddress,//адрес аптеки
+        pharmacyName: req.body.pharmacyName,//наименование аптечной организации
+        address: req.body.address,//адрес аптеки
         img: req.body.img,
         name: req.body.name,
         weight: req.body.weight, //вес
@@ -29,8 +29,8 @@ module.exports.medicineController = {
   editMedicine: async (req, res) => {
     try {
       const medicine = await Medicines.findByIdAndUpdate(req.params.id, {
-        nameOfThePharmacy: req.body.nameOfThePharmacy,//наименование аптечной организации
-        pharmacyAaddress: req.body.pharmacyAaddress,//адрес аптеки
+        pharmacyName: req.body.pharmacyName,//наименование аптечной организации
+        address: req.body.address,//адрес аптеки
         img:req.body.img,
         name: req.body.name,
         weight: req.body.weight, //вес
