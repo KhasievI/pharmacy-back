@@ -1,12 +1,31 @@
 const mongoose = require("mongoose");
 
-const pharmacySchema = mongoose.Schema({
-  pharmacyName: { type: String, unique: true, required: true },
-  password: { type: String, required: true },
-  address: { type: String, required: true },
-  license: { type: String, required: true },
-  ogrn: { type: String, required: false },
-  inn: { type: String, required: false },
+const pharmacySchema = new mongoose.Schema({
+  pharmacyName: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+  address: {
+    type: String,
+    required: true,
+  },
+  license: {
+    type: String,
+    required: true,
+  },
+  ogrn: {
+    type: String,
+    required: true,
+  },
+  inn: {
+    type: String,
+    required: true,
+  },
 });
 
 const Pharmacy = mongoose.model("Pharmacy", pharmacySchema);

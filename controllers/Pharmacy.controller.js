@@ -3,12 +3,12 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { secret } = require("../config");
 
-const generateAccesToken = (id, nameOfThePharmacy) => {
+const generateAccesToken = (id, pharmacyName) => {
   const payload = {
     id,
-    nameOfThePharmacy,
+    pharmacyName,
   };
-  return jwt.sign(payload, secret, { expiresIn: "30d" });
+  return jwt.sign(payload, secret, { expiresIn: "7d" });
 };
 
 module.exports.pharmacyController = {
@@ -20,7 +20,7 @@ module.exports.pharmacyController = {
         return res.status(400).json({ message: "пользователь с таким именем уже существует" });
       }
       const hashPassword = bcrypt.hashSync(password, 7);
-      const user = new Pharmacy({
+      const pharmacy = new Pharmacy({
         pharmacyName,
         password: hashPassword,
         address,
@@ -36,14 +36,15 @@ module.exports.pharmacyController = {
           message: "Пароль не может быть меньше 4 или больше 12 символов",
         });
       }
-      await user.save();
-      const token = generateAccesToken(user._id, user.pharmacyName);
+      await pharmacy.save();
+      const token = generateAccesToken(pharmacy._id, pharmacy.pharmacyName);
       return res.json({ token });
     } catch (error) {
       console.log(error.message);
       res.status(400).json({ message: "registration error" });
     }
   },
+
   login: async (req, res) => {
     try {
       const { pharmacyName, password } = req.body;
@@ -61,47 +62,48 @@ module.exports.pharmacyController = {
       return res.status(400).json({ message: "Login error" });
     }
   },
+
   editPharmacy: async (req, res) => {
     try {
-      const pharmacy = await Pharmacy.findByIdAndUpdate(req.params.id, {
+      const user = await Pharmacy.findByIdAndUpdate(req.params.id, {
         pharmacyName: req.body.pharmacyName,
         password: req.body.password,
         address: req.body.address,
-        License: req.body.License,
+        license: req.body.license,
         ogrn: req.body.ogrn,
         inn: req.body.inn,
-      })
-      return res.json(pharmacy);
+      });
     } catch (error) {
-      console.log(error.massage);
       return res.status(400).json({ message: error.message });
     }
   },
-  deletePharmacy: async (req, res) => {
-    try {
-      const pharmacy = Pharmacy.findByIdAndDelete(req.params.id);
-      return res.json(pharmacy);
-    } catch (error) {
-      console.log(error.massage);
-      return res.status(400).json({ message: error.message });
-    }
-  },
+
   getPharmacies: async (req, res) => {
     try {
-      const pharmacy = await Pharmacy.find();
-      res.json(pharmacy);
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: "Server Error" });
-    }
+      const users = await Pharmacy.find();
+      res.json({ users });
+    } catch (error) { }
   },
+
   getPharmacyById: async (req, res) => {
     try {
-      const pharmacy = await Pharmacy.findById(req.params.id);
-      res.json(pharmacy);
+      const { id } = req.params;
+      const user = await Pharmacy.findById(id);
+      console.log(user);
+      res.json({ user });
     } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: "Server Error" });
+      console.log(error.message);
+      return res.status(400).json({ message: error.message });
+    }
+  },
+
+  deletePharmacy: async (req, res) => {
+    try {
+      const userId = req.params;
+      const user = await Pharmacy.findOneAndDelete({ userId });
+      res.json(user);
+    } catch (error) {
+      res.json({ message: error.message });
     }
   }
-};
+}

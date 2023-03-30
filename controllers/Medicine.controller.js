@@ -7,7 +7,7 @@ module.exports.medicineController = {
         pharmacyName: req.body.pharmacyName,//наименование аптечной организации
         address: req.body.address,//адрес аптеки
         img: req.body.img,
-        name: req.body.name,
+        medName: req.body.medName,
         weight: req.body.weight, //вес
         methodOfAdministrationAndDose: req.body.methodOfAdministrationAndDose, // способ применения и дозы
         typeOfDosageForm: req.body.typeOfDosageForm,//вид лекарственной формы (гранулы гомеопатические, капли гомеопатические, мазь гомеопатическая, тритурация гомеопатическая и т.д.)
@@ -32,7 +32,7 @@ module.exports.medicineController = {
         pharmacyName: req.body.pharmacyName,//наименование аптечной организации
         address: req.body.address,//адрес аптеки
         img:req.body.img,
-        name: req.body.name,
+        medName: req.body.medName,
         weight: req.body.weight, //вес
         methodOfAdministrationAndDose: req.body.methodOfAdministrationAndDose, // способ применения и доза
         typeOfDosageForm: req.body.typeOfDosageForm,//вид лекарственной формы (гранулы гомеопатические, капли гомеопатические, мазь гомеопатическая, тритурация гомеопатическая и т.д.)
