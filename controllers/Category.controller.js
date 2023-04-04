@@ -14,7 +14,7 @@ module.exports.categoryController = {
   },
   deleteCat: async (req, res) => {
     try {
-      const cat = Category.findByIdAndDelete(req.params.id);
+      const cat = await Category.findByIdAndDelete(req.params.id);
       return res.json(cat);
     } catch (error) {
       console.log(error.massage);

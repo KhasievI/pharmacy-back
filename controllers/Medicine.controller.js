@@ -31,10 +31,10 @@ module.exports.medicineController = {
       const medicine = await Medicines.findByIdAndUpdate(req.params.id, {
         pharmacyName: req.body.pharmacyName,//наименование аптечной организации
         address: req.body.address,//адрес аптеки
-        img:req.body.img,
+        img: req.body.img,
         medName: req.body.medName,
         weight: req.body.weight, //вес
-        methodOfAdministrationAndDose: req.body.methodOfAdministrationAndDose, // способ применения и доза
+        methodOfAdministrationAndDose: req.body.methodOfAdministrationAndDose, // способ применения и дозы
         typeOfDosageForm: req.body.typeOfDosageForm,//вид лекарственной формы (гранулы гомеопатические, капли гомеопатические, мазь гомеопатическая, тритурация гомеопатическая и т.д.)
         dateOfManufacture: req.body.dateOfManufacture, //дата изготовления
         expirationDate: req.body.expirationDate,// дата окончания срока
@@ -53,7 +53,7 @@ module.exports.medicineController = {
   },
   deleteMedicine: async (req, res) => {
     try {
-      const medicine = Medicines.findByIdAndDelete(req.params.id);
+      const medicine = await Medicines.findByIdAndDelete(req.params.id);
       return res.json(medicine);
     } catch (error) {
       console.log(error.massage);
