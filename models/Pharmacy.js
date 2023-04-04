@@ -10,6 +10,10 @@ const pharmacySchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  logo: {
+    type: String,
+    default: ''
+  },
   address: {
     type: String,
     required: true,
