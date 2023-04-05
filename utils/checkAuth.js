@@ -18,7 +18,7 @@ module.exports = checkAuth = (req, res, next) => {
       }
   } else {
       return res.status(401).json({
-          message: 'Нет доступа!!!!!',
+          message: 'Нет доступа!',
       })
   }
 }

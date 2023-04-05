@@ -24,8 +24,9 @@ module.exports.pharmacyController = {
       }
       const hashPassword = bcrypt.hashSync(password, 7);
 
-      // let fileName = Date.now().toString() + req.files.logo.name;
-      // req.files.logo.mv(path.join(__dirname, '..', 'uploads', fileName));
+      // let fileName = Date.now().toString() + req.files.image.name
+      // const __dirname = dirname(fileURLToPath(import.meta.url))
+      // req.files.image.mv(path.join(__dirname, '..', 'uploads', fileName))
 
       const pharmacy = new Pharmacy({
         pharmacyName,
