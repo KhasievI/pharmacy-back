@@ -1,13 +1,14 @@
-const { Router } = require("express");
-const router = Router();
-const { pharmacyController } = require("../controllers/Pharmacy.controller");
-const checkAuth  = require('../utils/checkAuth.js')
+import { Router } from "express";
+import { registratePharmacy, login, editPharmacy, deletePharmacy, getPharmacies, getPharmacyById } from "../controllers/Pharmacy.controller.js";
+import {checkAuth}  from '../utils/checkAuth.js'
+const router = new Router()
 
-router.post("/registrate", pharmacyController.registration);
-router.post("/login", pharmacyController.login);
-router.patch("/pharmacy/:id", pharmacyController.editPharmacy);
-router.delete("/pharmacy/:id", pharmacyController.deletePharmacy);
-router.get("/pharmacy", pharmacyController.getPharmacies);
-router.get("/me", checkAuth, pharmacyController.getPharmacyById);
+router.post("/registrate", registratePharmacy);
+router.post("/login", login);
+router.patch("/pharmacy/:id", editPharmacy);
+router.delete("/pharmacy/:id", deletePharmacy);
+router.get("/pharmacy", getPharmacies);
+router.get("/me", checkAuth, getPharmacyById);
 
-module.exports = router;
+export default router
+

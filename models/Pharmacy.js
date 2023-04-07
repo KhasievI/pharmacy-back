@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const pharmacySchema = new mongoose.Schema({
   pharmacyName: {
@@ -32,6 +32,4 @@ const pharmacySchema = new mongoose.Schema({
   },
 });
 
-const Pharmacy = mongoose.model("Pharmacy", pharmacySchema);
-
-module.exports = Pharmacy;
+export default mongoose.model("Pharmacy", pharmacySchema);
