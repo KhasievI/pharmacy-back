@@ -1,12 +1,12 @@
-const { secret } = require("../config");
-const jwt = require("jsonwebtoken");
+// import { secret } from "../config.js";
+import jwt from 'jsonwebtoken'
 
-module.exports = checkAuth = (req, res, next) => {
+export const checkAuth = (req, res, next) => {
   const token = (req.headers.authorization || '').replace(/Bearer\s?/, '')
 
   if (token) {
       try {
-          const decoded = jwt.verify(token, secret)
+          const decoded = jwt.verify(token, 'secret')
 
           req.pharmacyId = decoded.id
 

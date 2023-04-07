@@ -1,8 +1,12 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const dotenv = require("dotenv");
-const cors = require("cors");
-const fileUpload = require("express-fileupload");
+import express from "express";
+import mongoose from "mongoose";
+import dotenv from "dotenv";
+import cors from "cors";
+import fileUpload from "express-fileupload";
+
+import catsRoute from './routes/pharmacy.route.js'
+import medRoute from './routes/medicine.route.js'
+import pharmRoute from './routes/pharmacy.route.js'
 
 const app = express();
 dotenv.config();
@@ -16,9 +20,9 @@ app.use(fileUpload());
 app.use(express.json());
 app.use(express.static("uploads"));
 
-app.use(require("./routes/category.route"));
-app.use(require("./routes/medicine.route"));
-app.use(require("./routes/pharmacy.route"));
+app.use("/", catsRoute);
+app.use("/", medRoute);
+app.use("/", pharmRoute);
 
 async function start() {
   try {

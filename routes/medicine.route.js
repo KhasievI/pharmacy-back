@@ -1,11 +1,12 @@
-const { Router } = require("express");
+import { Router } from "express";
+import { addMedicine, editMedicine, deleteMedicine, getMedicines, getMedicineById } from "../controllers/Medicine.controller.js";
 const router = Router();
-const { medicineController } = require("../controllers/Medicine.controller");
 
-router.post("/med", medicineController.addMedicine);
-router.patch("/med/:id", medicineController.editMedicine);
-router.delete("/med/:id", medicineController.deleteMedicine);
-router.get("/meds", medicineController.getMedicines);
-router.get("/med/:id", medicineController.getMedicineById);
+router.post("/med", addMedicine);
+router.patch("/med/:id", editMedicine);
+router.delete("/med/:id", deleteMedicine);
+router.get("/meds", getMedicines);
+router.get("/med/:id", getMedicineById);
 
-module.exports = router;
+export default router
+
