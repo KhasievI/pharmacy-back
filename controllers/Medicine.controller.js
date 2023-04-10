@@ -1,18 +1,12 @@
 import Medicines from "../models/Medicine.js";
-import path, { dirname } from 'path'
-import { fileURLToPath } from "url";
+
 
 export const addMedicine = async (req, res) => {
   try {
-
-    let fileName = Date.now().toString() + req.files.img.name
-    const __dirname = dirname(fileURLToPath(import.meta.url))
-    req.files.img.mv(path.join(__dirname, '..', 'uploads', fileName))
-
     const medicine = await Medicines.create({
       pharmacyName: req.body.pharmacyName,//наименование аптечной организации
       address: req.body.address,//адрес аптеки
-      img: req.files ? fileName : "",
+      img: req.body.img,
       medName: req.body.medName,
       weight: req.body.weight, //вес
       methodOfAdministrationAndDose: req.body.methodOfAdministrationAndDose, // способ применения и дозы

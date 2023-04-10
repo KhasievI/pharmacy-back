@@ -96,9 +96,10 @@ export const editPharmacy = async (req, res) => {
   }
 }
 export const getPharmacies = async (req, res) => {
+
   try {
     const pharmacies = await Pharmacy.find();
-    return res.json({ pharmacies });
+    return res.json(pharmacies);
   } catch (error) { }
 }
 export const getPharmacyById = async (req, res) => {
