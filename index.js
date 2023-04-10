@@ -4,7 +4,8 @@ import dotenv from "dotenv";
 import cors from "cors";
 import fileUpload from "express-fileupload";
 
-import catsRoute from './routes/pharmacy.route.js'
+import cartRoute from './routes/cart.route.js'
+import catsRoute from './routes/category.route.js'
 import medRoute from './routes/medicine.route.js'
 import pharmRoute from './routes/pharmacy.route.js'
 
@@ -20,6 +21,7 @@ app.use(fileUpload());
 app.use(express.json());
 app.use(express.static("uploads"));
 
+app.use("/", cartRoute);
 app.use("/", catsRoute);
 app.use("/", medRoute);
 app.use("/", pharmRoute);
