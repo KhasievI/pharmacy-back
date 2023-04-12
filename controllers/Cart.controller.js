@@ -1,9 +1,11 @@
 import Cart from "../models/Cart.js";
 
 export const createCartItem = async (req, res) => {
+  console.log(req)
   try {
     const addedCart = await Cart.create({
-      cart: req.body,
+      cart: req.body.cart,
+      customer: req.body.customer
     });
     return res.json(addedCart);
   } catch (err) {
@@ -22,10 +24,11 @@ export const updateCart = async (req, res) => {
   }
 }
 
-export const getCart = async (req, res) => {
+export const getCartByPharm = async (req, res) => {
+  console.log(req);
   try {
-    const cart = await Cart.findById(req.params.id);
-    return res.json(cart);
+    const carts = await Cart.find(req.params.pharm);
+    return res.json(carts);
   } catch (err) {
     return res.json(err);
   }
@@ -37,6 +40,18 @@ export const getAllCarts = async (req, res) => {
     return res.json(allCarts);
   } catch (err) {
     return res.json(err);
+  }
+}
+
+export const deleteCart = async (req, res) => {
+  try {
+    const cart = await Cart.findOneAndDelete( req.params.id );
+    res.json({
+      cart,
+      message: 'Удалено'
+    });
+  } catch (error) {
+    res.json({ message: error.message });
   }
 }
 
