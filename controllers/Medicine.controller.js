@@ -20,7 +20,10 @@ export const addMedicine = async (req, res) => {
       countInStock: req.body.countInStock, //количество в наличии
       category: req.body.category,
     })
-    return res.json(medicine);
+    res.json({
+      medicine,
+      message: 'Succeeded'
+    })
   } catch (error) {
     console.log(error.massage);
     return res.status(400).json({ message: error.message });
@@ -45,7 +48,10 @@ export const editMedicine = async (req, res) => {
       countInStock: req.body.countInStock, //количество в наличии
       category: req.body.category,
     })
-    return res.json(medicine);
+    res.json({
+      medicine,
+      message: 'Succeeded'
+    })
   } catch (error) {
     console.log(error.massage);
     return res.status(400).json({ message: error.message });
@@ -54,7 +60,10 @@ export const editMedicine = async (req, res) => {
 export const deleteMedicine = async (req, res) => {
   try {
     const medicine = await Medicines.findByIdAndDelete(req.params.id);
-    return res.json(medicine);
+    res.json({
+      medicine,
+      message: 'Succeeded'
+    })
   } catch (error) {
     console.log(error.massage);
     return res.status(400).json({ message: error.message });
@@ -62,8 +71,11 @@ export const deleteMedicine = async (req, res) => {
 }
 export const getMedicines = async (req, res) => {
   try {
-    const medicines = await Medicines.find();
-    res.json(medicines);
+    const medicine = await Medicines.find();
+    res.json({
+      medicine,
+      message: 'Succeeded'
+    })
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Server Error" });
@@ -72,7 +84,10 @@ export const getMedicines = async (req, res) => {
 export const getMedicineById = async (req, res) => {
   try {
     const medicine = await Medicines.findById(req.params.id);
-    res.json(medicine);
+    res.json({
+      medicine,
+      message: 'Succeeded'
+    })
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Server Error" });

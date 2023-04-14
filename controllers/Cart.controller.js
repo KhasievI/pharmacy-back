@@ -1,7 +1,6 @@
 import Cart from "../models/Cart.js";
 
 export const createCartItem = async (req, res) => {
-  console.log(req)
   try {
     const addedCart = await Cart.create({
       cart: req.body.cart,
@@ -25,9 +24,8 @@ export const updateCart = async (req, res) => {
 }
 
 export const getCartByPharm = async (req, res) => {
-  console.log(req);
   try {
-    const carts = await Cart.find(req.params.pharm);
+    const carts = await Cart.findById(req.params.id);
     return res.json(carts);
   } catch (err) {
     return res.json(err);
